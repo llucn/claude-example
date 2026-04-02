@@ -37,16 +37,19 @@
   "dependencies": {
     "@expo/metro-config": "~0.20.14",
     "@expo/metro-runtime": "~5.0.4",
+    "axios": "^1.14.0",
     "expo": "~53.0.10",
     "expo-splash-screen": "~0.30.9",
     "expo-status-bar": "~2.2.3",
     "expo-system-ui": "~5.0.8",
+    "oidc-client-ts": "^3.5.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.3",
     "react-native-svg": "~15.11.2",
     "react-native-svg-transformer": "~1.5.1",
     "react-native-web": "~0.20.0",
+    "react-oidc-context": "^3.3.1",
     "react-router-dom": "6.29.0"
   }
 }
