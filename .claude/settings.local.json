@@ -19,7 +19,8 @@
       "Bash(fi)",
       "Bash(done)",
       "Bash(find ~/.m2/repository/org/springframework/boot -name *webmvc*test*4.0* -o -name *servlet*test*4.0*)",
-      "Bash(xargs -I{} basename \"{}\")"
+      "Bash(xargs -I{} basename \"{}\")",
+      "Bash(openspec list:*)"
     ]
   }
 }
