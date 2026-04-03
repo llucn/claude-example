@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { AuthProvider } from 'react-oidc-context';
 import * as ReactDOM from 'react-dom/client';
 import App from './app/app';
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <AuthProvider {...oidcConfig}>
-      <BrowserRouter>
+      <Router>
         <App/>
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   </StrictMode>
 );
