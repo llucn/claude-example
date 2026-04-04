@@ -58,7 +58,42 @@
 
 3. 点击 **Save**
 
-## 3. Token 配置
+## 3. 创建 Client（移动端）
+
+1. 进入 **Clients** → **Create client**
+2. 按步骤填写：
+
+### Step 1: General Settings
+
+| 参数 | 值 |
+|------|------|
+| Client type | OpenID Connect |
+| Client ID | `bsr-mobile` |
+| Name | BSR 移动应用 |
+
+### Step 2: Capability Config
+
+| 参数 | 值 | 说明 |
+|------|------|------|
+| Client authentication | OFF | 移动端公共客户端，无需 Client Secret |
+| Authorization | OFF | |
+| Authentication flow | 勾选 Standard flow | Authorization Code Flow with PKCE |
+
+### Step 3: Login Settings
+
+| 参数 | 值 | 说明 |
+|------|------|------|
+| Root URL | 留空 | |
+| Valid redirect URIs | `claude-example-mobile://auth` | Deep Link 回调地址（Custom URL Scheme） |
+| Valid redirect URIs | `exp+claude-example-mobile://auth` | Expo Go 开发调试回调地址 |
+| Valid post logout redirect URIs | `claude-example-mobile://auth` | 登出后回调地址 |
+| Web origins | `+` | 自动使用 Valid redirect URIs 中的来源 |
+
+> **注意**：`expo-auth-session` 在 Expo Go 中生成的 redirect URI 以 `exp+` 为前缀，Development Build 和生产包使用 Custom Scheme（`@claude-example/mobile://`），两者均需添加至 Valid redirect URIs。
+
+3. 点击 **Save**
+
+## 4. Token 配置
 
 进入 **Realm settings** → **Tokens** 页签：
 
@@ -74,7 +109,7 @@
 |------|------|------|
 | Access Token Lifespan | 留空（继承 Realm） | 可按需覆盖 |
 
-## 4. 创建测试用户
+## 5. 创建测试用户
 
 1. 进入 **Users** → **Create user**
 2. 填写信息：
@@ -92,7 +127,7 @@
    - 输入密码
    - Temporary 设为 OFF（避免首次登录强制修改）
 
-## 5. 应用配置参数汇总
+## 6. 应用配置参数汇总
 
 ### Web 前端（packages/web）
 
@@ -114,7 +149,18 @@
 |------|------|
 | spring.security.oauth2.resourceserver.jwt.issuer-uri | `https://auth.developbranch.cn/realms/bsr` |
 
-## 6. 验证配置
+### 移动端（packages/mobile）
+
+配置文件：`src/app/auth/oidc-config.ts`
+
+| 参数 | 值 |
+|------|------|
+| authority | `https://auth.developbranch.cn/realms/bsr` |
+| client_id | `bsr-mobile` |
+| redirect_uri | `@claude-example/mobile://auth`（由 `makeRedirectUri` 生成） |
+| scope | `openid profile email` |
+
+## 7. 验证配置
 
 ### 检查 OIDC Discovery
 

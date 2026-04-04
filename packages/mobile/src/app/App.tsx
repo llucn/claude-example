@@ -11,20 +11,21 @@ import {
   Linking,
 } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
+import { AuthProvider } from './auth/AuthContext';
+import { AuthGuard } from './auth/AuthGuard';
+import { UserHeader } from './auth/UserHeader';
 
 export const App = () => {
   const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
 
   return (
-    <>
+    <AuthProvider>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView
-        style={{
-          flex: 1,
-        }}
-      >
-        <ScrollView
+      <SafeAreaView style={{ flex: 1 }}>
+        <AuthGuard>
+          <UserHeader />
+          <ScrollView
           ref={(ref) => {
             scrollViewRef.current = ref;
           }}
@@ -594,8 +595,9 @@ export const App = () => {
             </View>
           </View>
         </ScrollView>
+        </AuthGuard>
       </SafeAreaView>
-    </>
+    </AuthProvider>
   );
 };
 const styles = StyleSheet.create({
