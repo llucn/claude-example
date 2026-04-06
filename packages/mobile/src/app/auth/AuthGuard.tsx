@@ -22,7 +22,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   if (!isAuthenticated) {
     return (
       <View style={styles.center}>
-        <Text style={styles.title}>ERS 系统</Text>
+        <Text style={styles.title}>App Name</Text>
         <TouchableOpacity style={styles.button} onPress={login}>
           <Text style={styles.buttonText}>登录</Text>
         </TouchableOpacity>

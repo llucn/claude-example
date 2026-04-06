@@ -15,7 +15,7 @@ export function configureApiClient(
 }
 
 export const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: process.env.EXPO_PUBLIC_API_BASE_URL || '/api',
 });
 
 apiClient.interceptors.request.use(async (config) => {
