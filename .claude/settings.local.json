@@ -28,7 +28,9 @@
       "Bash(npx tsc:*)",
       "Bash(npx nx:*)",
       "Bash(node:*)",
-      "Bash(npx expo:*)"
+      "Bash(npx expo:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['artifacts'][1]['status'], d['artifacts'][2]['status']\\)\")",
+      "Bash(mvn compile:*)"
     ]
   }
 }
