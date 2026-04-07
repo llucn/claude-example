@@ -5,11 +5,11 @@ import {
   DatePicker,
   Form,
   Input,
-  InputNumber,
   message,
   Typography,
 } from 'antd';
 import { apiClient } from '../auth/api-client';
+import { BaiduMapPicker } from '../components/BaiduMapPicker';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -17,8 +17,7 @@ const { TextArea } = Input;
 interface IssueFormValues {
   title: string;
   description: string;
-  longitude: number;
-  latitude: number;
+  location: { longitude: number; latitude: number };
   address?: string;
   deadline: unknown;
   recruitCount?: number;
@@ -32,8 +31,11 @@ export function PublishIssuePage() {
   const handleSubmit = async (values: IssueFormValues) => {
     setSubmitting(true);
     try {
+      const { location, ...rest } = values;
       const payload = {
-        ...values,
+        ...rest,
+        longitude: location.longitude,
+        latitude: location.latitude,
         deadline: (values.deadline as { toISOString: () => string }).toISOString(),
       };
       await apiClient.post('/issues', payload);
@@ -71,35 +73,12 @@ export function PublishIssuePage() {
             <TextArea rows={4} placeholder="请输入事件描述" />
           </Form.Item>
 
-          <Form.Item label="位置" required>
-            <Input.Group compact>
-              <Form.Item
-                name="longitude"
-                noStyle
-                rules={[{ required: true, message: '请输入经度' }]}
-              >
-                <InputNumber
-                  style={{ width: '50%' }}
-                  placeholder="经度"
-                  min={-180}
-                  max={180}
-                  step={0.0000001}
-                />
-              </Form.Item>
-              <Form.Item
-                name="latitude"
-                noStyle
-                rules={[{ required: true, message: '请输入纬度' }]}
-              >
-                <InputNumber
-                  style={{ width: '50%' }}
-                  placeholder="纬度"
-                  min={-90}
-                  max={90}
-                  step={0.0000001}
-                />
-              </Form.Item>
-            </Input.Group>
+          <Form.Item
+            name="location"
+            label="位置"
+            rules={[{ required: true, message: '请在地图上选择位置' }]}
+          >
+            <BaiduMapPicker />
           </Form.Item>
 
           <Form.Item name="address" label="地址">
@@ -119,7 +98,7 @@ export function PublishIssuePage() {
           </Form.Item>
 
           <Form.Item name="recruitCount" label="招募人数">
-            <InputNumber min={1} placeholder="请输入招募人数（选填）" style={{ width: '100%' }} />
+            <Input type="number" placeholder="请输入招募人数（选填）" style={{ width: '100%' }} />
           </Form.Item>
 
           <Form.Item name="skillRequirement" label="技能要求">
