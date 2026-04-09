@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const discovery = AuthSession.useAutoDiscovery(
-    'https://auth.developbranch.cn/realms/bsr'
+    process.env.EXPO_PUBLIC_OIDC_AUTHORITY
   );
 
   const [request, response, promptAsync] = AuthSession.useAuthRequest(

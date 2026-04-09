@@ -33,7 +33,14 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-.env*.local
+
+# Ignore all environment variable files
+.env
+.env.local
+.env.*.local
+
+# Keep a template (safe to commit)
+!.env.example
 
 # System Files
 .DS_Store
