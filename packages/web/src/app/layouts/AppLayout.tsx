@@ -2,13 +2,14 @@ import type { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'react-oidc-context';
 import { Layout, Menu, Dropdown, Avatar, Space, theme } from 'antd';
-import { HomeOutlined, UserOutlined, LogoutOutlined, AlertOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined, LogoutOutlined, AlertOutlined, UnorderedListOutlined } from '@ant-design/icons';
 
 const { Header, Content } = Layout;
 
 const menuItems = [
   { key: '/', icon: <HomeOutlined />, label: '主页' },
   { key: '/publish', icon: <AlertOutlined />, label: '发布事件' },
+  { key: '/issues', icon: <UnorderedListOutlined />, label: '查看事件' },
   { key: '/profile', icon: <UserOutlined />, label: 'Profile' },
 ];
 

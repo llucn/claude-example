@@ -6,6 +6,8 @@ import { AppLayout } from './layouts/AppLayout';
 import { HomePage } from './pages/HomePage';
 import { ProfilePage } from './pages/ProfilePage';
 import { PublishIssuePage } from './pages/PublishIssuePage';
+import { IssueListPage } from './pages/IssueListPage';
+import { IssueDetailPage } from './pages/IssueDetailPage';
 
 export function App() {
   useConfigureApiClient();
@@ -18,6 +20,8 @@ export function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/publish" element={<PublishIssuePage />} />
+          <Route path="/issues" element={<IssueListPage />} />
+          <Route path="/issues/:id" element={<IssueDetailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </AppLayout>

@@ -9,6 +9,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/issues")
 public class IssueController {
@@ -17,6 +19,16 @@ public class IssueController {
 
     public IssueController(IssueService issueService) {
         this.issueService = issueService;
+    }
+
+    @GetMapping
+    public List<Issue> listIssues() {
+        return issueService.getAllIssues();
+    }
+
+    @GetMapping("/{id}")
+    public Issue getIssue(@PathVariable Long id) {
+        return issueService.getIssueById(id);
     }
 
     @PostMapping
