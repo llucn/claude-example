@@ -1,3 +1,5 @@
+## MODIFIED Requirements
+
 ### Requirement: Top Navigation Menu
 
 应用 SHALL 在顶部导航栏中提供水平菜单，包含以下导航项：
@@ -28,6 +30,8 @@
 - **WHEN** 用户点击顶部菜单中的「Profile」项
 - **THEN** 页面跳转到 `/profile` 路径，菜单高亮切换到「Profile」项
 
+## MODIFIED Requirements
+
 ### Requirement: Route Configuration
 
 应用 SHALL 配置以下路由：
@@ -51,17 +55,3 @@
 
 - **WHEN** 用户直接访问 `/issues/42` 路径
 - **THEN** 应用渲染 IssueDetailPage 组件，加载 id 为 42 的事件详情
-
-### Requirement: User Info in Header
-
-顶部导航栏右侧 SHALL 显示当前登录用户的用户名和用户头像（Avatar），点击后展开下拉菜单，包含「登出」选项。
-
-#### Scenario: 用户信息展示
-
-- **WHEN** 用户已登录并访问任意页面
-- **THEN** 顶部导航栏右侧显示用户名和头像
-
-#### Scenario: 下拉菜单登出
-
-- **WHEN** 用户点击顶部右侧头像/用户名，并在下拉菜单中点击「登出」
-- **THEN** 应用调用 OIDC signoutRedirect，用户被重定向到 Keycloak 登出页面

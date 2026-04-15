@@ -33,3 +33,27 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export interface Issue {
+  id: number;
+  title: string;
+  description: string;
+  longitude: number;
+  latitude: number;
+  address?: string;
+  deadline: string;
+  recruitCount?: number;
+  skillRequirement?: string;
+  createdBy: string;
+  createdAt: string;
+}
+
+export async function fetchIssues(): Promise<Issue[]> {
+  const response = await apiClient.get<Issue[]>('/issues');
+  return response.data;
+}
+
+export async function fetchIssueById(id: number | string): Promise<Issue> {
+  const response = await apiClient.get<Issue>(`/issues/${id}`);
+  return response.data;
+}
