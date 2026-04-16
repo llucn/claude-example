@@ -1,5 +1,362 @@
-/* You can add global styles to this file, and also import other style files */
-/* body margin 0 is required for antd layout to work properly */
+/* CSS Variables Theme System */
+[data-theme=dark] {
+  --bg: #0b1120;
+  --surface: #111827;
+  --card: #16202f;
+  --card2: #1c2b3a;
+  --card-head-bg: rgba(255, 255, 255, .02);
+  --border: rgba(255, 255, 255, .07);
+  --border-hi: rgba(255, 255, 255, .13);
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
+  --accent-dim: rgba(14, 165, 233, .12);
+  --hover-subtle: rgba(255, 255, 255, .04);
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+  --topbar-h: 60px;
+  color-scheme: dark;
+}
+
+[data-theme=light] {
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --card: #FFFFFF;
+  --card2: #F9FAFB;
+  --card-head-bg: #F9FAFB;
+  --border: #E5E8ED;
+  --border-hi: #CBD2DA;
+  --accent: #0284c7;
+  --accent-hover: #0369a1;
+  --accent-dim: rgba(2, 132, 199, .08);
+  --hover-subtle: rgba(0, 0, 0, .03);
+  --text: #111827;
+  --muted: #6B7280;
+  --muted2: #9CA3AF;
+  --topbar-h: 56px;
+  color-scheme: light;
+}
+
+:root:not([data-theme]) {
+  --bg: #0b1120;
+  --surface: #111827;
+  --card: #16202f;
+  --card2: #1c2b3a;
+  --card-head-bg: rgba(255, 255, 255, .02);
+  --border: rgba(255, 255, 255, .07);
+  --border-hi: rgba(255, 255, 255, .13);
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
+  --accent-dim: rgba(14, 165, 233, .12);
+  --hover-subtle: rgba(255, 255, 255, .04);
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+  --topbar-h: 60px;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Topbar styles */
+.app-topbar {
+  height: var(--topbar-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 12px;
+}
+
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.hamburger:hover {
+  color: var(--text);
+  background: var(--hover-subtle);
+}
+
+.topbar-spacer {
+  flex: 1;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--hover-subtle);
+}
+
+/* Mobile sidebar */
+.mobile-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.mobile-sidebar-overlay.active {
+  display: block;
+}
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.mobile-sidebar.open {
+  transform: translateX(0);
+}
+
+.mobile-sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-sidebar-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted2);
+  cursor: pointer;
+}
+
+.mobile-sidebar-nav {
+  flex: 1;
+  padding: 10px 0;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+
+.mobile-nav-item:hover {
+  color: var(--text);
+  background: var(--hover-subtle);
+}
+
+.mobile-nav-item.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .app-topbar {
+    padding: 0 16px;
+  }
+
+  /* Hide desktop menu on mobile */
+  .app-topbar .ant-menu {
+    display: none !important;
+  }
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 40px;
+}
+
+@media (max-width: 900px) {
+  .content { padding: 16px; }
+}
+
+@media (max-width: 480px) {
+  .content { padding: 12px; }
+}
+
+/* Page header */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Card */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  animation: fadeUp .35s ease both;
+}
+
+.card-head {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card-head-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-head-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.card-body {
+  padding: 16px 20px;
+}
+
+/* Meta grid for detail pages */
+.meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-item:last-child {
+  border-bottom: none;
+}
+
+.meta-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.meta-value {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Profile avatar */
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 auto 12px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  to { opacity: 1; }
 }
