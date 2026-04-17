@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Alert, Avatar, Button, Card, Descriptions, Spin, Typography } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Button, Spin } from 'antd';
 import { apiClient } from '../auth/api-client';
-
-const { Title } = Typography;
 
 interface UserInfo {
   sub: string;
@@ -46,17 +43,12 @@ export function ProfilePage() {
   if (error) {
     return (
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
-        <Alert
-          message="加载失败"
-          description={error}
-          type="error"
-          showIcon
-          action={
-            <Button size="small" onClick={fetchUserInfo}>
-              重试
-            </Button>
-          }
-        />
+        <div className="card">
+          <div className="card-body" style={{ textAlign: 'center', padding: '40px 20px' }}>
+            <p style={{ color: 'var(--muted)', marginBottom: 16 }}>{error}</p>
+            <Button onClick={fetchUserInfo}>重试</Button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -66,33 +58,39 @@ export function ProfilePage() {
 
   return (
     <div>
-      <Title level={3}>个人资料</Title>
-      <Card>
-        <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <Avatar size={80} icon={<UserOutlined />} style={{ backgroundColor: '#143055' }}>
-            {avatarLabel}
-          </Avatar>
-          <div style={{ marginTop: 12 }}>
-            <Typography.Text strong style={{ fontSize: 18 }}>
+      <div className="page-header">
+        <h1 className="page-title">个人资料</h1>
+      </div>
+      <div className="card" style={{ maxWidth: 600 }}>
+        <div className="card-body">
+          <div style={{ textAlign: 'center', marginBottom: 24 }}>
+            <div className="profile-avatar">{avatarLabel}</div>
+            <div style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)' }}>
               {displayName}
-            </Typography.Text>
+            </div>
+          </div>
+          <div className="meta-grid">
+            <div className="meta-item">
+              <span className="meta-label">用户名</span>
+              <span className="meta-value">{userInfo?.preferred_username ?? '-'}</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">姓名</span>
+              <span className="meta-value">{userInfo?.name ?? '-'}</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">邮箱</span>
+              <span className="meta-value">{userInfo?.email ?? '-'}</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">用户 ID</span>
+              <span className="meta-value" style={{ fontSize: 12, fontFamily: 'monospace' }}>
+                {userInfo?.sub ?? '-'}
+              </span>
+            </div>
           </div>
         </div>
-        <Descriptions column={1} bordered>
-          <Descriptions.Item label="用户名">
-            {userInfo?.preferred_username ?? '-'}
-          </Descriptions.Item>
-          <Descriptions.Item label="姓名">
-            {userInfo?.name ?? '-'}
-          </Descriptions.Item>
-          <Descriptions.Item label="邮箱">
-            {userInfo?.email ?? '-'}
-          </Descriptions.Item>
-          <Descriptions.Item label="用户 ID">
-            {userInfo?.sub ?? '-'}
-          </Descriptions.Item>
-        </Descriptions>
-      </Card>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -7,7 +7,7 @@ import { AuthProvider, useAuth } from './auth/AuthContext';
 import { AuthGuard } from './auth/AuthGuard';
 import { configureApiClient } from './auth/api-client';
 import { BottomTabNavigator } from './navigation/BottomTabNavigator';
-import { theme } from './theme';
+import { lightTheme, darkTheme } from './theme';
 
 function AppContent() {
   const { refreshToken, logout } = useAuth();
@@ -24,9 +24,10 @@ function AppContent() {
 }
 
 export const App = () => {
+  const colorScheme = useColorScheme();
   return (
     <AuthProvider>
-      <PaperProvider theme={theme}>
+      <PaperProvider theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
         <SafeAreaProvider>
           <NavigationContainer>
             <StatusBar barStyle="dark-content" />
