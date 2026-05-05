@@ -31,7 +31,7 @@
 ### Requirement: Route Configuration
 
 应用 SHALL 配置以下路由：
-- `/` → 主页组件
+- `/` → DashboardPage 组件（原为主页组件，现替换为 Dashboard）
 - `/publish` → PublishIssuePage 组件
 - `/issues` → IssueListPage 组件
 - `/issues/:id` → IssueDetailPage 组件
@@ -51,6 +51,11 @@
 
 - **WHEN** 用户直接访问 `/issues/42` 路径
 - **THEN** 应用渲染 IssueDetailPage 组件，加载 id 为 42 的事件详情
+
+#### Scenario: 主页路由渲染 Dashboard
+
+- **WHEN** 用户访问 `/` 路径
+- **THEN** 应用渲染 DashboardPage 组件，顶部菜单高亮「主页」项
 
 ### Requirement: User Info in Header
 
