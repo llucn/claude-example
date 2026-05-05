@@ -3,7 +3,7 @@ import { ConfigProvider, theme } from 'antd';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import { useConfigureApiClient } from './auth/useConfigureApiClient';
 import { AppLayout } from './layouts/AppLayout';
-import { HomePage } from './pages/HomePage';
+import { DashboardPage } from './pages/DashboardPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { PublishIssuePage } from './pages/PublishIssuePage';
 import { IssueListPage } from './pages/IssueListPage';
@@ -20,7 +20,7 @@ function AppInner() {
       <ProtectedRoute>
         <AppLayout>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<DashboardPage />} />
             <Route path="/publish" element={<PublishIssuePage />} />
             <Route path="/issues" element={<IssueListPage />} />
             <Route path="/issues/:id" element={<IssueDetailPage />} />
